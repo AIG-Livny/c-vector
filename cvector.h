@@ -160,6 +160,34 @@ typedef struct cvector_metadata_t {
         } \
     } while (0)
 
+// @brief cvector_erase_range - removes a range of elements from the vector
+// @param vec - the vector
+// @param from - starting index of the range to remove (inclusive)
+// @param to - ending index of the range to remove (exclusive)
+// @return void
+#define cvector_erase_range(vec, from, to) \
+    do { \
+    if (vec) { \
+        const size_t cv_sz__ = cvector_size(vec); \
+        if ((from) < cv_sz__ && (to) < cv_sz__ && (from) < (to)) { \
+            cvector_elem_destructor_t elem_destructor__ = \
+                cvector_elem_destructor(vec); \
+            if (elem_destructor__) { \
+                for (int k = (from); k < (to); k++) { \
+                    elem_destructor__(&(vec)[k]); \
+                } \
+            } \
+            const size_t range = (to) - (from); \
+            cvector_set_size((vec), cv_sz__ - (range)); \
+            cvector_clib_memmove( \
+                (vec) + (from), \
+                (vec) + (to), \
+                sizeof(*(vec)) * (cv_sz__ - (range) - (from)) \
+            ); \
+        } \
+    } \
+    } while (0)
+
 // @brief cvector_clear - erase all of the elements in the vector
 // @param vec - the vector
 // @return void
@@ -445,34 +473,6 @@ typedef struct cvector_metadata_t {
             } \
         } \
     } while (0)
-
-// @brief cvector_erase_range - removes a range of elements from the vector
-// @param vec - the vector
-// @param from - starting index of the range to remove (inclusive)
-// @param to - ending index of the range to remove (exclusive)
-// @return void
-#define cvector_erase_range(vec, from, to) \
-do { \
-    if (vec) { \
-        const size_t cv_sz__ = cvector_size(vec); \
-        if ((from) < cv_sz__ && (to) < cv_sz__ && (from) < (to)) { \
-            cvector_elem_destructor_t elem_destructor__ = \
-                cvector_elem_destructor(vec); \
-            if (elem_destructor__) { \
-                for (int k = (from); k < (to); k++) { \
-                    elem_destructor__(&(vec)[k]); \
-                } \
-            } \
-            const size_t range = (to) - (from); \
-            cvector_set_size((vec), cv_sz__ - (range)); \
-            cvector_clib_memmove( \
-                (vec) + (from), \
-                (vec) + (to), \
-                sizeof(*(vec)) * (cv_sz__ - (range) - (from)) \
-            ); \
-        } \
-    } \
-} while (0)
 
 // @brief cvector_for_each_in - for header to iterate over vector each element's address
 // @param it - iterator of type pointer to vector element
