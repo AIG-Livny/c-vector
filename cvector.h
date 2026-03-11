@@ -283,6 +283,23 @@ typedef struct cvector_metadata_t {
         cvector_set_size((vec), cvector_size(vec) + 1);                         \
     } while (0)
 
+// @brief cvector_push_back_data - adds `size` of elements to the end of the vector
+// @param vec - the vector
+// @param array - the array value to add
+// @param size - number of elements in array
+// @return void
+#define cvector_push_back_data(vec, array, array_size)                                                                  \
+    do {                                                                                                                \
+        cvector_clib_assert( array );                                                                                   \
+        cvector_clib_assert( array_size );                                                                              \
+                                                                                                                        \
+        if( cvector_capacity(vec) < cvector_size(vec) + (array_size) ) {                                                \
+            cvector_reserve((vec), cvector_size(vec) + (array_size));                                                   \
+        }                                                                                                                       \
+        cvector_clib_memmove( (vec) + (cvector_size(vec)), (void*)(array), (array_size) * sizeof(*(vec)) );    \
+        cvector_set_size((vec), cvector_size(vec) + (array_size));                                                              \
+    } while (0)
+
 /**
  * @brief cvector_insert - insert element at position pos to the vector
  * @param vec - the vector

@@ -417,4 +417,29 @@ UTEST(test, erase_range) {
     cvector_free(v);
 }
 
+UTEST(test, vector_push_back_data) {
+    cvector_vector_type(int) vec = NULL;
+
+    cvector_push_back(vec, 99);
+    cvector_push_back(vec, 99);
+
+    int array[] = {1,2,3,4,5,6};
+
+    cvector_push_back_data(vec, array, sizeof(array)/sizeof(array[0]));
+
+    ASSERT_EQ(cvector_size(vec), 8);
+
+    cvector_push_back(vec, 99);
+    cvector_push_back_data(vec, array, sizeof(array)/sizeof(array[0]));
+
+    ASSERT_EQ(cvector_size(vec), 15);
+
+    ASSERT_EQ(vec[0], 99);
+    ASSERT_EQ(vec[4], 3);
+    ASSERT_EQ(vec[8], 99);
+    ASSERT_EQ(vec[12], 4);
+
+    cvector_free(vec);
+}
+
 UTEST_MAIN();
