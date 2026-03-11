@@ -442,4 +442,22 @@ UTEST(test, vector_push_back_data) {
     cvector_free(vec);
 }
 
+UTEST(test, vector_insert_data) {
+    cvector_vector_type(int) vec = NULL;
+
+    cvector_push_back(vec, 99);
+    cvector_push_back(vec, 99);
+
+    int array[] = {1,2,3,4,5,6};
+
+    cvector_insert_data(vec,1,array, 6);
+
+    ASSERT_EQ(vec[0], 99);
+    ASSERT_EQ(vec[1], 1);
+    ASSERT_EQ(vec[2], 2);
+    ASSERT_EQ(vec[7], 99);
+
+    cvector_free(vec);
+}
+
 UTEST_MAIN();
