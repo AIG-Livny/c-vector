@@ -1,0 +1,4 @@
+Name: c-vector
+Description: c vector implementation in one-header library
+Version: 0.1.0
+Cflags: -I${pcfiledir}

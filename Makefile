@@ -1,8 +1,8 @@
 TARGET			=	bin/test
-SOURCES			=	unit-tests.c
+SOURCES			=	unit_tests.c
 OBJ_PATH		?=  obj
 CC				?=  gcc
-CFLAGS			?=	-O0 -g
+CFLAGS			?=	-O0 -g -DDEBUG
 
 LIBS_HEADERS_URLS +=	https://github.com/sheredom/utest.h.git
 

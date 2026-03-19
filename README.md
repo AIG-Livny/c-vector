@@ -1,4 +1,4 @@
-This fork is cleaned from garbage files and extended by new functions.
+This fork is extended by new functions.
 
 This is an implementation of a `std::vector` like growable array, but in plain
 C89 code. The result is a type safe, easy to use, dynamic array that has a
@@ -47,24 +47,24 @@ int main(int argc, char *argv[]) {
 	(void)argc;
 	(void)argv;
 
-	/* add some elements to the back */
+	// add some elements to the back
 	cvector_push_back(v, 10);
 	cvector_push_back(v, 20);
 	cvector_push_back(v, 30);
 	cvector_push_back(v, 40);
 
-	/* remove an element by specifying an array subscript */
+	// remove an element by specifying an array subscript
 	cvector_erase(v, 2);
 
-	/* remove an element from the back */
+	// remove an element from the back
 	cvector_pop_back(v);
 
-	/* print out some stats about the vector */
+	// print out some stats about the vector
 	printf("pointer : %p\n", (void *)v);
 	printf("capacity: %lu\n", cvector_capacity(v));
 	printf("size    : %lu\n", cvector_size(v));
 
-	/* iterator over the vector using "iterator" style */
+	// iterator over the vector using "iterator" style
 	if (v) {
 		int *it;
 		int i = 0;
@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	/* iterator over the vector standard indexing too! */
+	// iterator over the vector standard indexing too!
 	if (v) {
 		size_t i;
 		for (i = 0; i < cvector_size(v); ++i) {
@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	/* well, we don't have destructors, so let's clean things up */
+	// well, we don't have destructors, so let's clean things up
 	cvector_free(v);
 
 	return 0;

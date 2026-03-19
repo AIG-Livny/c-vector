@@ -63,11 +63,11 @@ UTEST(test, vector_at) {
         }
     }
 
-    /* test non-exists position */
+    // test non-exists position
     int pos_non_exists = 999;
     ASSERT_TRUE(cvector_at(v, pos_non_exists) == NULL);
 
-    /* remove last element*/
+    // remove last element
     cvector_pop_back(v);
     ASSERT_TRUE(cvector_at(v, 4) == NULL);
 
@@ -85,12 +85,12 @@ UTEST(test, vector_empty) {
 UTEST(test, vector_push_pop) {
     cvector_vector_type(int) v = NULL;
 
-    /* add some elements to the back */
+    // add some elements to the back
     cvector_push_back(v, 10);
     cvector_push_back(v, 20);
     cvector_push_back(v, 30);
 
-    /* and remove one too */
+    // and remove one too
     cvector_pop_back(v);
 
     ASSERT_TRUE(cvector_capacity(v) == 4);
@@ -102,18 +102,18 @@ UTEST(test, vector_push_pop) {
 UTEST(test, vector_iterator) {
     cvector_vector_type(int) v = NULL;
 
-    /* add some elements to the back */
+    // add some elements to the back
     cvector_push_back(v, 10);
     cvector_push_back(v, 20);
     cvector_push_back(v, 30);
 
-    /* and remove one too */
+    // and remove one too
     cvector_pop_back(v);
 
     ASSERT_TRUE(cvector_capacity(v) == 4);
     ASSERT_TRUE(cvector_size(v) == 2);
 
-    /* iterator over the vector using "iterator" style */
+    // iterator over the vector using "iterator" style
     if (v) {
         cvector_iterator(int) it;
         int i = 0;
@@ -135,18 +135,18 @@ UTEST(test, vector_iterator) {
 UTEST(test, vector_index) {
     cvector_vector_type(int) v = NULL;
 
-    /* add some elements to the back */
+    // add some elements to the back
     cvector_push_back(v, 10);
     cvector_push_back(v, 20);
     cvector_push_back(v, 30);
 
-    /* and remove one too */
+    // and remove one too
     cvector_pop_back(v);
 
     ASSERT_TRUE(cvector_capacity(v) == 4);
     ASSERT_TRUE(cvector_size(v) == 2);
 
-    /* iterator over the vector standard indexing too! */
+    // iterator over the vector standard indexing too!
     if (v) {
         size_t i;
         for (i = 0; i < cvector_size(v); ++i) {
@@ -294,10 +294,10 @@ UTEST(test, vector_for_each_int) {
     ASSERT_TRUE(cvector_capacity(v) >= 10);
 
     cvector_for_each_in(it, v) {
-        /* NOTE(eteran): double pointer because we have an interator to an int*,
-         * so first deref to get the int*, the second to get int. Sure, this is a
-         * silly thing to do, but this is a test
-         */
+        //  NOTE(eteran): double pointer because we have an interator to an int*,
+//          so first deref to get the int*, the second to get int. Sure, this is a
+//          silly thing to do, but this is a test
+//
         ASSERT_TRUE(**it == 42);
     }
 

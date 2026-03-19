@@ -10,33 +10,39 @@
 // allow these defines to be overridden.
 // functions for allocation and deallocation need to correspond to each other, fall back to C library functions if not all are overridden
 #if !defined(cvector_clib_free) || !defined(cvector_clib_malloc) || !defined(cvector_clib_calloc) || !defined(cvector_clib_realloc)
-#ifdef cvector_clib_free
-#undef cvector_clib_free
-#endif
-#ifdef cvector_clib_malloc
-#undef cvector_clib_malloc
-#endif
-#ifdef cvector_clib_calloc
-#undef cvector_clib_calloc
-#endif
-#ifdef cvector_clib_realloc
-#undef cvector_clib_realloc
-#endif
-#include <stdlib.h>
-#define cvector_clib_free free
-#define cvector_clib_malloc malloc
-#define cvector_clib_calloc calloc
-#define cvector_clib_realloc realloc
+    #ifdef cvector_clib_free
+    #undef cvector_clib_free
+    #endif
+
+    #ifdef cvector_clib_malloc
+    #undef cvector_clib_malloc
+    #endif
+
+    #ifdef cvector_clib_calloc
+    #undef cvector_clib_calloc
+    #endif
+
+    #ifdef cvector_clib_realloc
+    #undef cvector_clib_realloc
+    #endif
+
+    #include <stdlib.h>
+    #define cvector_clib_free free
+    #define cvector_clib_malloc malloc
+    #define cvector_clib_calloc calloc
+    #define cvector_clib_realloc realloc
 #endif
 // functions independent of memory allocation
 #ifndef cvector_clib_assert
 #include <assert.h> // for assert
 #define cvector_clib_assert assert
 #endif
+
 #ifndef cvector_clib_memcpy
 #include <string.h> // for memcpy
 #define cvector_clib_memcpy memcpy
 #endif
+
 #ifndef cvector_clib_memmove
 #include <string.h> // for memmove
 #define cvector_clib_memmove memmove
@@ -61,7 +67,7 @@ typedef struct cvector_metadata_t {
 
 // @brief cvector_vector_type - The vector type used in this library
 // @param type The type of vector to act on.
-#define cvector_vector_type(type) type *
+#define cvector_vector_type(type) type*
 
 // @brief cvector - Syntactic sugar to retrieve a vector type
 // @param type The type of vector to act on.
